@@ -27,6 +27,18 @@ class Home extends Component {
       todos: new_list,
     });
   };
+
+
+  deleteTodo = (id) => {
+    const todos = this.state.todos.filter((todo) => {
+      return todo.id !== id;
+    });
+    this.setState({
+      todos: todos,
+    });
+};
+
+
   render() {
     return (
       <div className="Home">
