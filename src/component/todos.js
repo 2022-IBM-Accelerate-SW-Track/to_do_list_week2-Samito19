@@ -10,18 +10,37 @@ import { Card, CardContent, Checkbox, Grid } from "@mui/material";
 // 4. Think of lines 14-23 as a loop. For each todo in the todo list, we want to give the list item
 // a key, and it's own card shown in the UI
 
-const Todos = ({ todos }) => {
-  const todoList = todos.length ? (
-    todos.map((todo) => {
-      return (
+const Todos = (props) => {
+  const handleDelete = (id) => {
+    props.deleteTodo(id);
+  };
+  const todoList = props.todos.length ? (
+    props.todos.map((todo) => {
+      return todo.checked ? null : (
         <Grid key={todo.id}>
-          <Card>
+          <Card style={{ margin: "3vh" }}>
             {/* Remember, we set the local state of this todo item when the user submits the form in 
             AddTodo.js. All we need to do is return the todo list item {todo.content} */}
             <CardContent className="task-card-content">
-              <Checkbox style={{ marginLeft: "-1.5vh"}} defaultChecked color="success" checked={true} />
-              <span style={{ marginLeft: "1.5vh",  marginRight: "5vh", fontWeight: "500", fontSize: "20"}} >{todo.content}</span>
-              <span style={{ marginLeft: "3vh", marginRight: "5vh", fontWeight: "500", fontSize: "20"}}>{todo.date_time}</span>
+              <Checkbox
+                style={{ marginLeft: "-1.5vh", marginRight: "2vh" }}
+                color="success"
+                checked={todo.checked}
+                onClick={() => {
+                  handleDelete(todo.id);
+                }}
+              />
+              <span
+                style={{
+                  fontWeight: "500",
+                  marginRight: "auto",
+                  fontSize: "20",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {todo.content}
+              </span>
+              <span style={{ fontSize: "20" }}>{todo.date}</span>
             </CardContent>
           </Card>
         </Grid>
