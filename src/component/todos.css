@@ -1,4 +1,6 @@
 .todoCollection {
+  display: flex;
+  flex-direction: column-reverse;
   width: 30%;
   padding-bottom: 20px;
   align-self: center;

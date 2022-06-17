@@ -1,6 +1,12 @@
 import React from "react";
 import "../component/todos.css";
-import { Card, CardContent, Checkbox, Grid } from "@mui/material";
+import {
+  Card,
+  Checkbox,
+  Grid,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 
 // 1. This component formats and returns the list of todos.
 // 2. Treat the question mark like an if statement.
@@ -21,7 +27,7 @@ const Todos = (props) => {
           <Card style={{ margin: "3vh" }}>
             {/* Remember, we set the local state of this todo item when the user submits the form in 
             AddTodo.js. All we need to do is return the todo list item {todo.content} */}
-            <CardContent className="task-card-content">
+            <ListItemButton component="a" href="#simple-list">
               <Checkbox
                 style={{ marginLeft: "-1.5vh", marginRight: "2vh" }}
                 color="success"
@@ -30,18 +36,9 @@ const Todos = (props) => {
                   handleDelete(todo.id);
                 }}
               />
-              <span
-                style={{
-                  fontWeight: "500",
-                  marginRight: "auto",
-                  fontSize: "20",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {todo.content}
-              </span>
-              <span style={{ fontSize: "20" }}>{todo.date}</span>
-            </CardContent>
+              <ListItemText primary={todo.content} />
+              <ListItemText primary={todo.date} />
+            </ListItemButton>
           </Card>
         </Grid>
       );

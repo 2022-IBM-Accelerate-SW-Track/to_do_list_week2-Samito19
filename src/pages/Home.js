@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Todos from "../component/todos";
 import AddTodo from "../component/AddTodo";
 import "../pages/Home.css";
-import { Alert } from "@mui/material";
+import TaskAlreadyExists from "../component/TaskAlreadyExists";
 
 class Home extends Component {
   // Create a default state of this component with an empty list of todos.
@@ -24,11 +24,13 @@ class Home extends Component {
 
     var duplicate = false;
 
-    this.state.todos.forEach((todo) => {
+    this.state.todos.map((todo) => {
       if (todo.content === new_todo.content) {
         this.setState({ duplicate: true });
         return (duplicate = true);
       }
+
+      return (duplicate = false);
     });
 
     if (!duplicate) {
@@ -62,14 +64,7 @@ class Home extends Component {
         <AddTodo addTodo={this.addTodo} />
         {/* When returning the Todos component, todos is a prop passed to the todos.js file
          to format and render the current todo list state */}
-        {this.state.duplicate ? (
-          <Alert
-            style={{ width: "35vh", alignSelf: "center", marginTop: "2vh" }}
-            severity="error"
-          >
-            Task already exists !
-          </Alert>
-        ) : null}
+        <TaskAlreadyExists duplicate={this.state.duplicate}/>
         <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}/>
       </div>
     );
