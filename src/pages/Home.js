@@ -25,7 +25,7 @@ class Home extends Component {
     var duplicate = false;
 
     this.state.todos.map((todo) => {
-      if (todo.content === new_todo.content) {
+      if (todo.content.trim() === new_todo.content.trim()) {
         this.setState({ duplicate: true });
         return (duplicate = true);
       }
